@@ -2,7 +2,6 @@ from tkinter import *
 from tkinter.filedialog import asksaveasfilename, askopenfilename
 import subprocess
 
-# Colors and Fonts
 BG_COLOR = "#2b2b2b"
 TEXT_COLOR = "#dcdcdc"
 FONT = ("Consolas", 12)
@@ -12,7 +11,7 @@ BUTTON_TEXT_COLOR = "#ffffff"
 CURSOR_COLOR = "#000000" 
 
 compiler = Tk()
-compiler.title('My Fantastic IDE')
+compiler.title('Python Code Editor')
 compiler.geometry("800x600")
 compiler.configure(bg=BG_COLOR)
 file_path = ''
