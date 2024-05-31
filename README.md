@@ -1,6 +1,7 @@
 # Python Code-Editor
 - Welcome to Python Code-Editor, a simple yet powerful Python code editor designed to enhance your coding experience. This editor provides an intuitive and aesthetically pleasing environment for writing, saving, 
-  and running Python scripts. Key features include:
+  and running Python scripts.
+# Key features include:
 - File Management: Open, save, and save as Python files effortlessly.
 - User Input Handling: Easily provide input to your scripts through a user-friendly popup interface.
 - Enhanced Output Display: View the output and errors of your executed scripts in a dedicated section.
