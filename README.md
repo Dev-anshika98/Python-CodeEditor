@@ -23,7 +23,7 @@ This IDE is perfect for beginners learning Python and for developers looking for
 ## Installation and Setup
 - Clone the repository: git clone [https://github.com/Dev-anshika98/Python-CodeEditor.git](https://github.com/Dev-anshika98/Python-CodeEditor.git)
 - Navigate to the project directory: cd Python-CodeEditor
-- Run the editor: python Python-CodeEditor.py
+- Run the editor:Run  python main.py
 ## Usage
 - Open a Python File:Go to the File menu and select Open.
 - Choose a Python file (.py) from your system.
