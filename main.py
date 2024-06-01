@@ -3,6 +3,7 @@ from tkinter.filedialog import asksaveasfilename, askopenfilename
 from tkinter.colorchooser import askcolor
 from tkinter.font import Font, families
 import subprocess
+import re
 
 # Default Colors and Fonts
 BG_COLOR = "#2b2b2b"
@@ -54,29 +55,33 @@ def run():
         text.pack(expand=True)
         return
 
-    def get_user_input():
-        user_input = input_text.get('1.0', END)
-        save_prompt.destroy()
-        execute_code(user_input)
+    code = editor.get('1.0', END)
+    if "input(" in code:
+        def get_user_input():
+            user_input = input_text.get('1.0', END)
+            input_prompt.destroy()
+            execute_code(user_input)
 
-    def execute_code(user_input):
-        command = f'python {file_path}'
-        process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-        output, error = process.communicate(input=user_input.encode())
-        code_output.delete('1.0', END)
-        code_output.insert('1.0', output.decode())
-        code_output.insert('1.0', error.decode())
+        input_prompt = Toplevel()
+        input_prompt.title('User Input Required')
+        input_prompt.geometry("400x200")
+        input_prompt.configure(bg=BG_COLOR)
+        text = Label(input_prompt, text='Provide input for the script:', font=("Arial", 12), bg=BG_COLOR, fg=TEXT_COLOR)
+        text.pack(pady=10)
+        input_text = Text(input_prompt, height=5, width=40, font=(FONT_FAMILY, FONT_SIZE), bg=TEXT_COLOR, fg=BG_COLOR, insertbackground=CURSOR_COLOR)
+        input_text.pack(pady=5)
+        submit_button = Button(input_prompt, text='Submit', command=get_user_input, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, font=BUTTON_FONT)
+        submit_button.pack(pady=10)
+    else:
+        execute_code('')
 
-    save_prompt = Toplevel()
-    save_prompt.title('User Input Required')
-    save_prompt.geometry("400x200")
-    save_prompt.configure(bg=BG_COLOR)
-    text = Label(save_prompt, text='Provide input for the script:', font=("Arial", 12), bg=BG_COLOR, fg=TEXT_COLOR)
-    text.pack(pady=10)
-    input_text = Text(save_prompt, height=5, width=40, font=FONT, bg=TEXT_COLOR, fg=BG_COLOR)
-    input_text.pack(pady=5)
-    submit_button = Button(save_prompt, text='Submit', command=get_user_input, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, font=BUTTON_FONT)
-    submit_button.pack(pady=10)
+def execute_code(user_input):
+    command = f'python {file_path}'
+    process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    output, error = process.communicate(input=user_input.encode())
+    code_output.delete('1.0', END)
+    code_output.insert('1.0', output.decode())
+    code_output.insert('1.0', error.decode())
 
 def open_settings():
     settings_window = Toplevel()
